@@ -26,4 +26,26 @@ describe('Testes de Prontuário', () => {
 
 		expect(respostaReqProntuario.body.data).to.deep.equal(respostaEsperada);
 	});
+	it('Não deve permitir criar prontuário para animal inexistente', async () => {
+		const token = respostaLogin.body.data.login.token;
+		const mutation = {
+			query: `mutation {
+				createProntuario(input: {
+					dataAtendimento: "10/10/2025",
+					descricao: "Consulta animal inexistente",
+					tratamento: "Nenhum",
+					exames: "Nenhum",
+					animalId: 9999
+				}) {
+					id
+				}
+			}`
+		};
+		const resposta = await request(BASE_URL_GRAPHQL)
+			.post('/graphql')
+			.set('Authorization', `Bearer ${token}`)
+			.send(mutation);
+		expect(resposta.body).to.have.property('errors');
+		expect(resposta.body.errors[0].message).to.match(/Animal não encontrado/i);
+	});
 });
