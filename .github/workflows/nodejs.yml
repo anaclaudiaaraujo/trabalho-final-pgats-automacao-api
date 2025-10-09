@@ -29,7 +29,7 @@ jobs:
       run: npm start &
 
     - name: Iniciar o Apollo (GraphQL)
-      run: npm run start-apollo &
+      run: npm run start:apollo &
 
     - name: Aguardar disponibilidade das APIs (REST:3000, GraphQL:4000)
       run: |
