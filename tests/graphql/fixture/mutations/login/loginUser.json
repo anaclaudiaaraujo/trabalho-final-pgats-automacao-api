@@ -1,0 +1,1 @@
+{"query":"mutation {\r\n  login(credentials: { email: \"admin@clinicavet.local\", password: \"tesT123\" }) {\r\n    token\r\n  }\r\n}"}

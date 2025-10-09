@@ -1,0 +1,24 @@
+{
+  "prontuario": {
+	"id": 1,
+	"dataAtendimento": "22/09/2025",
+	"descricao": "Tutor relata que pet está apático e com falta de apetite",
+	"tratamento": "Promun Cat 1ml/dia por 30 dias",
+	"exames": "Hemograma",
+	"animalId": 1,
+	"animal": {
+	  "id": 1,
+	  "nome": "Thor",
+	  "especie": "Gato",
+	  "raca": "SRD",
+	  "dataNascimento": "01/03/2022",
+	  "tutorId": 1,
+	  "tutor": {
+		"id": 1,
+		"nome": "Ana",
+		"email": "ana@mail.com",
+		"telefone": "27999999999"
+	  }
+	}
+  }
+}

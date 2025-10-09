@@ -1,0 +1,44 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v3
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Instalar dependências
+      run: npm install
+
+    - name: Executar testes do Controller
+      run: npm run test:rest:controller & npm run test:graphql:controller
+      
+    - name: Iniciar o server REST
+      run: npm start &
+
+    - name: Iniciar o Apollo (GraphQL)
+      run: npm run start-apollo &
+
+    - name: Aguardar disponibilidade das APIs (REST:3000, GraphQL:4000)
+      run: |
+        for i in {1..15}; do
+          nc -z localhost 3000 && break || sleep 1
+        done
+        for i in {1..15}; do
+          nc -z localhost 4000 && break || sleep 1
+        done
+
+    - name: Executar testes externos (REST + GraphQL)
+      run: npm run test:rest:external & npm run test:graphql:external

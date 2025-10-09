@@ -1,0 +1,6 @@
+{
+	"query": "query Prontuario($prontuarioId: Int!) {\r\n  prontuario(id: $prontuarioId) {\r\n    id\r\n    dataAtendimento\r\n    descricao\r\n    tratamento\r\n    exames\r\n    animalId\r\n    animal {\r\n      id\r\n      nome\r\n      especie\r\n      raca\r\n      dataNascimento\r\n      tutorId\r\n      tutor {\r\n        id\r\n        nome\r\n        email\r\n        telefone\r\n      }\r\n    }\r\n  }\r\n}",
+	"variables": {
+		"prontuarioId": 1
+	}
+}
