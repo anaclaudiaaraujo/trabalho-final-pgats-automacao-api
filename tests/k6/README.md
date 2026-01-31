@@ -46,7 +46,7 @@ K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_PERIOD=15s K6_WEB_DASHBOARD_EXPORT=tests/
 > A variável `K6_WEB_DASHBOARD_PERIOD=15s` foi utilizada na execução da suite para garantir uma agregação de métricas mais suave, dado o maior volume de dados processados. Nos testes individuais, essa configuração foi dispensada por serem execuções mais curtas onde o valor padrão de 10s apresentou resultados adequados.
 
 
-## Conceitos de Performance Aplicados
+## Conceitos Aplicados
 
 Abaixo são apresentados exemplos de como os conceitos foram implementados nas implementações:
 
