@@ -8,7 +8,7 @@
 
 Este projeto é uma API para gestão de uma clínica veterinária, permitindo o controle de tutores, animais e prontuários. Ele serve como base para estudos de integração entre diferentes padrões de API (REST e GraphQL) e práticas avançadas de testes de software e performance.
 
-## 📋 Sumário
+## Sumário
 
 - [Arquitetura](#-arquitetura)
 - [Tecnologias](#-tecnologias)
@@ -18,11 +18,11 @@ Este projeto é uma API para gestão de uma clínica veterinária, permitindo o 
 - [Relatórios](#-relatórios)
 - [Observações](#-observações)
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 A aplicação utiliza uma estrutura modular onde a lógica de negócio é centralizada no diretório `common`, permitindo que múltiplas interfaces de comunicação (REST e GraphQL) consumam os mesmos serviços e modelos.
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - **Runtime**: Node.js (v18+)
 - **Framework Web**: Express
@@ -32,7 +32,7 @@ A aplicação utiliza uma estrutura modular onde a lógica de negócio é centra
 - **Testes de Performance**: k6
 - **Relatórios**: Mochawesome & k6 Web Dashboard
 
-## 📂 Estrutura de Arquivos
+## Estrutura de Arquivos
 
 ```text
 ├── src/
@@ -46,7 +46,7 @@ A aplicação utiliza uma estrutura modular onde a lógica de negócio é centra
 └── .env.example    # Template de variáveis de ambiente
 ```
 
-## 🚀 Como Executar as APIs
+## Como Executar as APIs
 
 ### 1. Instalação e Configuração
 
@@ -81,7 +81,7 @@ Você pode rodar as APIs de forma independente:
 
 ---
 
-## 🧪 Como Executar os Testes
+## Como Executar os Testes
 
 Este projeto possui uma suite completa de testes funcionais e de performance.
 
@@ -109,7 +109,7 @@ Para detalhes sobre cenários, métricas e dashboards, consulte o [README dos Te
 
 ---
 
-## 📊 Relatórios
+## Relatórios
 
 - **Funcionais**: Após rodar `npm test`, o relatório HTML é gerado em `mochawesome-report/mochawesome.html`.
 - **Performance**: O k6 pode gerar dashboards em tempo real ou relatórios HTML estáticos (veja as instruções no [README dos Testes de Performance](tests/k6/README.md)).
