@@ -1,0 +1,18 @@
+[
+    {
+        "especie": "Cachorro",
+        "raca": "Golden Retriever"
+    },
+    {
+        "especie": "Cachorro",
+        "raca": "Pug"
+    },
+    {
+        "especie": "Gato",
+        "raca": "Persa"
+    },
+    {
+        "especie": "Gato",
+        "raca": "Siames"
+    }
+]

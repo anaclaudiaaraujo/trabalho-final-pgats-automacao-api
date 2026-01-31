@@ -1,98 +1,120 @@
-# API Veterinária - Gestão de Prontuários (Fundação)
+# API Veterinária - Gestão de Prontuários
 
-Descrição
---------
+![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![GraphQL](https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)
+![k6](https://img.shields.io/badge/k6-7D64FF?style=for-the-badge&logo=k6&logoColor=white)
+![Mocha](https://img.shields.io/badge/Mocha-8D6748?style=for-the-badge&logo=mocha&logoColor=white)
 
-Projeto base para uma API REST que gerencia tutores, animais e prontuários de uma clínica veterinária. Os dados são armazenados em memória (arrays dentro de `src/common/models`) — este é um esqueleto para facilitar o desenvolvimento e integração futura com uma camada persistente (banco de dados) e uma API GraphQL.
+Este projeto é uma API para gestão de uma clínica veterinária, permitindo o controle de tutores, animais e prontuários. Ele serve como base para estudos de integração entre diferentes padrões de API (REST e GraphQL) e práticas avançadas de testes de software e performance.
 
-Tecnologias utilizadas
-----------------------
+## 📋 Sumário
 
-- Node.js
-- Express
-- Swagger (swagger-jsdoc + swagger-ui-express)
+- [Arquitetura](#-arquitetura)
+- [Tecnologias](#-tecnologias)
+- [Estrutura de Arquivos](#-estrutura-de-arquivos)
+- [Como Executar as APIs](#-como-executar-as-apis)
+- [Como Executar os Testes](#-como-executar-os-testes)
+- [Relatórios](#-relatórios)
+- [Observações](#-observações)
 
-Estrutura de arquivos
----------------------
+## 🏗️ Arquitetura
 
-src/
-- common/
-  - models/        -> Modelos em memória (arrays) e contadores de ID
-  - services/      -> Regras de negócio e operações CRUD (sem dependência de HTTP)
-- rest/
-  - controllers/   -> Conectam services às requisições HTTP (req/res)
-  - routes/        -> Definição dos endpoints REST (com JSDoc para Swagger)
-  - config/        -> Configuração do Swagger
-  - app.js         -> Configuração do Express e middleware (não inicia o servidor)
-  - server.js      -> Inicializa o servidor
-- graphql/         -> Placeholder vazio para futura API GraphQL
-- graphql/         -> Implementação da API GraphQL (typeDefs, resolvers, context, app e server)
+A aplicação utiliza uma estrutura modular onde a lógica de negócio é centralizada no diretório `common`, permitindo que múltiplas interfaces de comunicação (REST e GraphQL) consumam os mesmos serviços e modelos.
 
-Como executar
--------------
+## 🛠️ Tecnologias
 
-1. Instale as dependências:
+- **Runtime**: Node.js (v18+)
+- **Framework Web**: Express
+- **Query Language**: GraphQL (Apollo Server)
+- **Documentação**: Swagger
+- **Testes Funcionais**: Mocha, Chai e Supertest
+- **Testes de Performance**: k6
+- **Relatórios**: Mochawesome & k6 Web Dashboard
+
+## 📂 Estrutura de Arquivos
+
+```text
+├── src/
+│   ├── common/     # Modelos de dados e serviços (Lógica de Negócio)
+│   ├── rest/       # Implementação da API REST (Rotas, Controllers)
+│   └── graphql/    # Implementação da API GraphQL (Schemas, Resolvers)
+├── tests/
+│   ├── rest/       # Testes funcionais REST (Mocha/Supertest)
+│   ├── graphql/    # Testes funcionais GraphQL (Mocha/Supertest)
+│   └── k6/         # Scripts de performance (k6)
+└── .env.example    # Template de variáveis de ambiente
+```
+
+## 🚀 Como Executar as APIs
+
+### 1. Instalação e Configuração
+
+Certifique-se de ter o Node.js e o npm instalados.
 
 ```bash
+# Instale as dependências
 npm install
+
+# Configure as variáveis de ambiente
+cp .env.example .env
 ```
 
-2. Inicie o servidor REST (com nodemon):
+> [!NOTE]
+> Edite o arquivo `.env` para ajustar a `JWT_SECRET` e as portas se necessário.
 
+### 2. Inicialização
+
+Você pode rodar as APIs de forma independente:
+
+- **API REST (Padrão: Porta 3000):**
+  ```bash
+  npm run start:rest
+  ```
+  *Documentação Swagger: [http://localhost:3000/api-docs](http://localhost:3000/api-docs)*
+
+- **API GraphQL (Padrão: Porta 4000):**
+  ```bash
+  npm run start:apollo
+  ```
+  *Playground GraphQL: [http://localhost:4000/graphql](http://localhost:4000/graphql)*
+
+---
+
+## 🧪 Como Executar os Testes
+
+Este projeto possui uma suite completa de testes funcionais e de performance.
+
+### 1. Testes Funcionais (Mocha)
+
+Para rodar todos os testes funcionais (REST e GraphQL):
 ```bash
-npm run start:rest
+npm test
 ```
 
-3. Dependências necessárias para GraphQL (recomendado):
+Para rodar suites específicas:
+- `npm run test:rest:external`: Testes de integração REST.
+- `npm run test:graphql:external`: Testes de integração GraphQL.
 
+Consulte o [README de Testes Funcionais](tests/README.md) para mais detalhes.
+
+### 2. Testes de Performance (k6)
+
+Os testes de performance devem ser executados via linha de comando k6. Exemplo:
 ```bash
-npm install apollo-server-express graphql
+k6 run tests/k6/load_test_suite.js
 ```
 
-4. (Opcional para desenvolvimento) Instale dependências para testes:
+Para detalhes sobre cenários, métricas e dashboards, consulte o [README dos Testes de Performance](tests/k6/README.md).
 
-```bash
-npm install --save-dev nodemon supertest
-```
+---
 
-5. Inicie o servidor GraphQL (ou use o script npm):
+## 📊 Relatórios
 
-```bash
-npm run start:apollo
-```
+- **Funcionais**: Após rodar `npm test`, o relatório HTML é gerado em `mochawesome-report/mochawesome.html`.
+- **Performance**: O k6 pode gerar dashboards em tempo real ou relatórios HTML estáticos (veja as instruções no [README dos Testes de Performance](tests/k6/README.md)).
 
-Endpoints principais
--------------------
+## ⚠️ Observações
 
-Base da API: http://localhost:3000/api
-
-- /api/tutores
-- /api/animais
-- /api/prontuarios
-
-Base da API GraphQL: http://localhost:4000/graphql
-
-Documentação Swagger
----------------------
-
-A documentação interativa da API está disponível em:
-
-http://localhost:3000/api-docs
-
-Observações
------------
-
-Este projeto guarda dados apenas em memória. Reiniciar a aplicação limpará todos os dados. A pasta `src/graphql` foi criada como placeholder para a implementação futura de uma API GraphQL.
-
-Notas para a API GraphQL:
-- Os typeDefs estão em `src/graphql/typeDefs.js`.
-- Os resolvers estão em `src/graphql/resolvers.js` e chamam os services em `src/common/services`.
-- O app da GraphQL (`src/graphql/app.js`) exporta uma função assíncrona que retorna a instância do Express (sem chamar `listen()`), facilitando testes com Supertest.
-
-Scripts relacionados:
-- `npm run start:apollo` - inicia o servidor GraphQL (usa `src/graphql/server.js`).
-- `npm run start:rest` - inicia o servidor REST (usa `src/rest/server.js`).
-
-Dependências adicionais sugeridas:
-- `apollo-server-express` e `graphql` (já adicionadas nas instruções acima).
-
+- **Persistência**: Atualmente os dados são armazenados exclusivamente em memória. Toda vez que o servidor é reiniciado, os dados são resetados para o estado inicial.
+- **Segurança**: Os endpoints protegidos utilizam JWT. As credenciais de teste são geradas dinamicamente pelos scripts de teste ou podem ser criadas manualmente via endpoints de registro.
