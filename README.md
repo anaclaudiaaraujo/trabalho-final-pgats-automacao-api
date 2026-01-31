@@ -8,16 +8,6 @@
 
 Este projeto é uma API para gestão de uma clínica veterinária, permitindo o controle de tutores, animais e prontuários. Ele serve como base para estudos de integração entre diferentes padrões de API (REST e GraphQL) e práticas avançadas de testes de software e performance.
 
-## Sumário
-
-- [Arquitetura](#-arquitetura)
-- [Tecnologias](#-tecnologias)
-- [Estrutura de Arquivos](#-estrutura-de-arquivos)
-- [Como Executar as APIs](#-como-executar-as-apis)
-- [Como Executar os Testes](#-como-executar-os-testes)
-- [Relatórios](#-relatórios)
-- [Observações](#-observações)
-
 ## Arquitetura
 
 A aplicação utiliza uma estrutura modular onde a lógica de negócio é centralizada no diretório `common`, permitindo que múltiplas interfaces de comunicação (REST e GraphQL) consumam os mesmos serviços e modelos.
